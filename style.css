@@ -1,0 +1,112 @@
+#list {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+}
+.card {
+	width: 304px;
+	height: 62px;
+	background-position: top !important;
+	background-size: cover !important;
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
+	flex-direction: row;
+	padding: 1rem;
+	transform-origin: top left;
+	transition: 1s;
+}
+
+.minicard{
+	transform: scale(0.5);
+	margin-bottom: -47px;
+}
+
+.minicard > .cardText > h4 {
+	font-size: 2.3rem;
+}
+
+.minicard > .cardText > div {
+	display: none;
+}
+
+.cardText{
+	display: inline-flex;
+	padding-left: 1rem; 
+	vertical-align: baseline;
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	color: white;
+	font-weight: 400;
+	line-height: 24px;
+	flex-direction: column;
+	min-width: 0; 
+}
+.cardText > h4{
+	font-size: 1.3rem;
+	line-height: 1.6;
+	font-weight: 400;
+	margin: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.avatar {
+	border-radius: 4px;
+	flex-shrink: 0;
+}
+
+html, body{
+	background-color: transparent;
+	margin: 0px;
+	padding: 0px;
+	width: 1920px;
+	height: 1080px;
+}
+
+.corner-object{
+	background-color: black;
+	position: fixed;
+	height: 65px;
+	width: 75px;
+	opacity: 0.5;
+	animation-iteration-count: infinite;
+}
+
+.hexagon{
+	-webkit-clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+	clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+	-webkit-clip-path: url("#polygon-clip-hexagon");
+    clip-path: url("#polygon-clip-hexagon");
+     @-moz-document url-prefix() { 
+    clip-path: url(#polygon-clip-hexagon);
+  }  
+}
+
+.slide {
+	animation: slideIn 1s normal forwards ease-in-out;
+	animation-iteration-count: 1
+}
+
+.fadeout {
+	animation: fadeOut 5s normal forwards ease-in-out;
+	animation-iteration-count: 1
+}
+
+@keyframes slideIn {
+	from{margin-top: -94px;}
+	to {margin-top: unset;}
+}
+
+@keyframes fadeOut {
+	from{opacity: 1;}
+	to {opacity: 0;}
+}
+
+@keyframes hexSolids {
+	0%{ opacity: 0.5; }
+	20%{ opacity: 0.7; }
+	60%{ opacity: 0.2; }
+	80%{ opacity: 0.5; }
+	100%{ opacity: 0.5; }
+}
