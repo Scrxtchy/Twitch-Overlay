@@ -30,6 +30,11 @@ function startSocket(){
 					const ret = (message.data.context == "sub") ? `Subscribed with ${message.data.sub_plan_name}` : `Resubbed as ${message.data.sub_plan_name} for ${message.data.months} months`
 					document.dispatchEvent(new CustomEvent('alert', {detail: {'UserID': message.user_id, 'eventType':ret}}))
 					break;
+				case 'community-points-broadcaster-v1':
+					switch(message.data.redemption.reward.id){
+						case "31f5f4b0-8a47-4bb1-9f41-7b0413ba2f2d": //Sample Event
+							document.dispatchEvent(new CustomEvent('alert', {detail: {'UserID': message.data.redemption.user.id, 'eventType':message.data.redemption.user_input}}))
+					}
 				default:
 				console.log("Unhandled Function")
 			}
@@ -48,7 +53,8 @@ function startSocket(){
 				"user-bits-updates-v1." + UserID,
 				"following." + UserID,
 				"chat_moderator_actions." + UserID,
-				"chatrooms-channel-v1." + UserID],
+				"chatrooms-channel-v1." + UserID,
+				"community-points-broadcaster-v1."+ UserID],
 				auth_token: Mobile_Auth
 			}
 		}
