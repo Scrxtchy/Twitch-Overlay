@@ -26,8 +26,20 @@ function startSocket(){
 				case 'user-bits-events-v1': //Untested
 					document.dispatchEvent(new CustomEvent('alert', {detail: {'UserID': message.user_id, 'eventType':message.data.chat_message}}))
 					break;
-				case 'user-subscribe-events-v1': //Untested
-					const ret = (message.data.context == "sub") ? `Subscribed with ${message.data.sub_plan_name}` : `Resubbed as ${message.data.sub_plan_name} for ${message.data.months} months`
+				case 'channel-subscribe-events-v1': //Untested
+					let ret
+					switch(message.context){
+						case "sub":
+						case "resub":
+							ret = `${message.context == "resub" ? "Resubscribed" : "Subscribed"} with ${message.sub_plan_name}`
+							break;
+						case "subgift":
+						case "resubgift":
+						case "anonsubgift":
+						case "anonresubgift":
+							ret = `${message.context == "subgift" || message.context == "resubgift" ? message.user_name : "Anonymous"} gifted a ${message.sub_plan_name} subscription`
+							break;
+					}
 					document.dispatchEvent(new CustomEvent('alert', {detail: {'UserID': message.user_id, 'eventType':ret}}))
 					break;
 				case 'community-points-broadcaster-v1':
@@ -46,7 +58,7 @@ function startSocket(){
 		{
 			type: "LISTEN",
 			data: {
-				topics: ["user-subscribe-events-v1." + UserID,
+				topics: ["channel-subscribe-events-v1." + UserID,
 				"chatrooms-user-v1." + UserID,
 				"stream-chat-room-v1." + UserID,
 				"channel-bits-events-v1." + UserID,
